@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accentColor: rgb(var(--accent-blue));
+  --primaryTxt: rgb(var(--dark-primary-txt));
+  --secondryTxt: rgb(var(--dark-secondry-txt));
+  --primaryBg: rgb(var(--dark-primary-bg));
+  --secondryBg: rgb(var(--dark-secondry-bg));
+  --popupBg: rgb(var(--dark-popup-bg));
+  --hoverBg: rgb(var(--dark-hoverBg));
+  --borderColor: rgb(var(--dark-border));
+
+  --dark-primary-txt: 231, 233, 234;
+  --light-primary-txt: 15, 20, 25;
+  --dim-primary-txt: 231, 233, 234;
+
+  --dark-secondry-txt: 113, 118, 123;
+  --light-secondry-txt: 83, 100, 113;
+  --dim-secondry-txt: 113, 118, 123;
+
+  --dark-primary-bg: 0, 0, 0;
+  --light-primary-bg: 254, 254, 254;
+  --dim-primary-bg: 22, 33, 44;
+
+  --dark-secondry-bg: 33, 35, 39;
+  --light-secondry-bg: 239, 243, 244;
+  --dim-secondry-bg: 40, 51, 64;
+
+  --dark-popup-bg: 36, 45, 53;
+  --light-popup-bg: 153, 153, 153;
+  --dim-popup-bg: 49, 65, 79;
+
+  --dark-hoverBg: 23, 23, 23;
+  --light-hoverBg: 231, 231, 231;
+  --dim-hoverBg: 43, 53, 63;
+
+  --dark-border: 47, 51, 54;
+  --light-border: 239, 243, 244;
+  --dim-border: 47, 51, 54;
+
+  --accent-blue: 29, 155, 240;
+  --accent-green: 0, 184, 122;
+  --accent-pink: 249, 26, 130;
+  --accent-yellow: 255, 213, 0;
+  --accent-purple: 120, 87, 255;
+  --accent-orange: 255, 122, 0;
+}

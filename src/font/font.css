@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "chirp";
+  font-style: normal;
+  src: url("/ChirpRegular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "chirp-medium";
+  font-style: normal;
+  src: url("/ChirpMedium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "chirp-semibold";
+  font-style: normal;
+  src: url("/ChirpSemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "chirp-bold";
+  font-style: normal;
+  src: url("/ChirpBold.ttf") format("truetype");
+}
