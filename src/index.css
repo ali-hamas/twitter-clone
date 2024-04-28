@@ -1,49 +1,114 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@layer tailwind-base, primereact, tailwind-utilities;
+
+@import "primereact/resources/themes/lara-light-blue/theme.css"
+  layer(primereact);
+
+@layer tailwind-base {
+  @tailwind base;
+}
+
+@layer tailwind-utilities {
+  @tailwind components;
+  @tailwind utilities;
+}
+
+@layer components {
+  .profile-img {
+    @apply size-10 rounded-full;
+  }
+  .profile-name {
+    @apply text-15 text-primaryTxt hover:underline;
+  }
+  .profile-username {
+    @apply text-15 text-secondryTxt;
+  }
+  .accent-btn {
+    @apply bg-accent text-primaryTxt;
+  }
+  .btn {
+    @apply flex min-h-9 cursor-pointer items-center justify-center rounded-full px-4 text-15 font-medium transition-all hover:saturate-150;
+  }
+  .absolute-center {
+    @apply absolute left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%];
+  }
+  .hollow-btn {
+    @apply btn bg-transparent h-10 border-[1px] border-[#536471] text-accent;
+  }
+  .cross-btn {
+    @apply absolute left-2 top-2 block size-8 rounded-full text-center leading-8 text-primaryTxt hover:bg-hoverBg;
+  }
+  .label-txt {
+    @apply absolute left-3 top-1/2 translate-y-[-50%] text-[17px] text-secondryTxt transition-all duration-300;
+  }
+  .input-field {
+    @apply bg-transparent h-50 w-full rounded-lg border px-3 pb-1 pt-5 text-15 text-primaryTxt focus:border-accent focus:ring-0;
+  }
+  .input-error {
+    @apply absolute right-0 top-0 text-red;
+  }
+}
+@layer base {
+  button {
+    @apply min-h-9 cursor-pointer rounded-full px-4 text-15 font-medium transition-all hover:saturate-150;
+  }
+  button:disabled {
+    @apply cursor-not-allowed opacity-50 hover:saturate-100;
+  }
+  input {
+    @apply outline-0;
+  }
+  svg {
+    @apply w-25 fill-primaryTxt;
+  }
+}
+@layer utilities {
+  .border {
+    border: 1px solid var(--borderColor);
+  }
+}
 
 :root {
-  --accentColor: rgb(var(--accent-blue));
-  --primaryTxt: rgb(var(--dark-primary-txt));
-  --secondryTxt: rgb(var(--dark-secondry-txt));
-  --primaryBg: rgb(var(--dark-primary-bg));
-  --secondryBg: rgb(var(--dark-secondry-bg));
-  --popupBg: rgb(var(--dark-popup-bg));
-  --hoverBg: rgb(var(--dark-hoverBg));
-  --borderColor: rgb(var(--dark-border));
+  --accentColor: var(--accent-blue);
+  --primaryTxt: var(--dark-primary-txt);
+  --secondryTxt: var(--dark-secondry-txt);
+  --primaryBg: var(--dark-primary-bg);
+  --secondryBg: var(--dark-secondry-bg);
+  --popupBg: var(--dark-popup-bg);
+  --hoverBg: var(--dark-hoverBg);
+  --borderColor: var(--dark-border);
 
-  --dark-primary-txt: 231, 233, 234;
-  --light-primary-txt: 15, 20, 25;
-  --dim-primary-txt: 231, 233, 234;
+  --dark-primary-txt: #e7e9ea;
+  --light-primary-txt: #0f1419;
+  --dim-primary-txt: #e7e9ea;
 
-  --dark-secondry-txt: 113, 118, 123;
-  --light-secondry-txt: 83, 100, 113;
-  --dim-secondry-txt: 113, 118, 123;
+  --dark-secondry-txt: #71767b;
+  --light-secondry-txt: #536471;
+  --dim-secondry-txt: #71767b;
 
-  --dark-primary-bg: 0, 0, 0;
-  --light-primary-bg: 254, 254, 254;
-  --dim-primary-bg: 22, 33, 44;
+  --dark-primary-bg: #000000;
+  --light-primary-bg: #fefefe;
+  --dim-primary-bg: #16212c;
 
-  --dark-secondry-bg: 33, 35, 39;
-  --light-secondry-bg: 239, 243, 244;
-  --dim-secondry-bg: 40, 51, 64;
+  --dark-secondry-bg: #212327;
+  --light-secondry-bg: #eff3f4;
+  --dim-secondry-bg: #283340;
 
-  --dark-popup-bg: 36, 45, 53;
-  --light-popup-bg: 153, 153, 153;
-  --dim-popup-bg: 49, 65, 79;
+  --dark-popup-bg: #242d35;
+  --light-popup-bg: #999999;
+  --dim-popup-bg: #31414f;
 
-  --dark-hoverBg: 23, 23, 23;
-  --light-hoverBg: 231, 231, 231;
-  --dim-hoverBg: 43, 53, 63;
+  --dark-hoverBg: #171717;
+  --light-hoverBg: #e7e7e7;
+  --dim-hoverBg: #2b353f;
 
-  --dark-border: 47, 51, 54;
-  --light-border: 239, 243, 244;
-  --dim-border: 47, 51, 54;
+  --dark-border: #2f3336;
+  --light-border: #eff3f4;
+  --dim-border: #2f3336;
 
-  --accent-blue: 29, 155, 240;
-  --accent-green: 0, 184, 122;
-  --accent-pink: 249, 26, 130;
-  --accent-yellow: 255, 213, 0;
-  --accent-purple: 120, 87, 255;
-  --accent-orange: 255, 122, 0;
+  --accent-blue: #1d9bf0;
+  --accent-green: #00ba7c;
+  --accent-pink: #f91880;
+  --accent-yellow: #ffd500;
+  --accent-purple: #7857ff;
+  --accent-orange: #ff7a00;
 }

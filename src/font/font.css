@@ -18,3 +18,8 @@
   font-style: normal;
   src: url("/ChirpBold.ttf") format("truetype");
 }
+@font-face {
+  font-family: "chirp-black";
+  font-style: normal;
+  src: url("/ChirpBlack.ttf") format("truetype");
+}

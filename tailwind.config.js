@@ -3,8 +3,8 @@ const colors = require("tailwindcss/colors");
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    darkMode: "selector",
     colors: {
+      transparent: colors.transparent,
       primaryBg: "var(--primaryBg)",
       secondryBg: "var(--secondryBg)",
       hoverBg: "var(--hoverBg)",
@@ -20,8 +20,10 @@ export default {
       "chirp-medium": ["chirp-medium", "sans-serif"],
       "chirp-semibold": ["chirp-semibold", "sans-serif"],
       "chirp-bold": ["chirp-bold", "sans-serif"],
+      "chirp-black": ["chirp-black", "sans-serif"],
     },
     fontSize: {
+      12: "12px",
       13: "13px",
       15: "15px",
       20: "20px",
@@ -31,11 +33,15 @@ export default {
         25: "25px",
         50: "50px",
         100: "100px",
+        200: "200px",
+        300: "300px",
+        350: "350px",
+        500: "500px",
       },
       boxShadow: {
         twitter: "0 0 15px #ffffff33, 0 0 3px 1px #ffffff26",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };
