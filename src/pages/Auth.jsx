@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../context/AuthContext";
 
 const Auth = () => {
-  useEffect(() => {
-    document.body.style.background = "var(--dark-primary-bg)";
-  }, []);
   return (
     <>
-      <div className="gap-200 flex min-h-dvh items-center justify-center">
+      <div className="flex min-h-dvh items-center justify-center gap-200">
         <div className="hidden lg:flex lg:items-center lg:justify-center">
           <svg viewBox="0 0 24 24" aria-hidden="true" className="size-350">
             <g>
@@ -17,20 +13,20 @@ const Auth = () => {
           </svg>
         </div>
         <div className="">
-          <div className="mb-10 font-chirp-bold text-[40px] sm:text-[64px]">
+          <div className="mb-10 font-chirp-black text-[40px] font-extrabold sm:text-[64px]">
             Happening now
           </div>
-          <div className="text-10 mb-8 font-chirp-bold text-[22px] sm:text-[30px]">
+          <div className="text-10 mb-8 font-chirp-black text-[22px] font-bold sm:text-[30px]">
             Join today.
           </div>
           <OAuthButtons text="Sign in" />
-          <Link to={"/signin"} className="btn accent-btn w-300 h-10">
+          <Link to={"/signin"} className="btn accent-btn h-10 w-300">
             Sign in with email
           </Link>
           <p className="mb-2 mt-10 font-chirp-medium text-[17px]">
             Not have an account?
           </p>
-          <Link to={"/signup"} className="hollow-btn w-300 h-10">
+          <Link to={"/signup"} className="hollow-btn h-10 w-300">
             Create account
           </Link>
         </div>

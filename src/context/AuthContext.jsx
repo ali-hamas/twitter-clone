@@ -6,6 +6,8 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
+  const [spinner, setSpinner] = useState(false);
+  const [formLoader, setFormLoader] = useState(false);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -13,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const loginUser = async (email, password) => {
-    setLoading(true);
+    setFormLoader(true);
     try {
       await account.createEmailPasswordSession(email, password);
       const accountDetails = await account.get();
@@ -21,18 +23,18 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-    setLoading(false);
+    setFormLoader(false);
   };
 
-  const registerUser = async (email, password, name) => {
-    setLoading(true);
+  const registerUser = async (id, email, password, name) => {
+    setFormLoader(true);
     try {
-      let a = await account.create(ID.unique(), email, password, name);
+      let a = await account.create(id, email, password, name);
       loginUser(email, password);
     } catch (error) {
       console.log(error);
     }
-    setLoading(false);
+    setFormLoader(false);
   };
 
   const OAuth = async (provider) => {
@@ -44,8 +46,10 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logoutUser = () => {
+    setLoading(true);
     account.deleteSession("current");
     setUser(null);
+    setLoading(false);
   };
 
   const userStatus = async () => {
@@ -66,6 +70,8 @@ export const AuthProvider = ({ children }) => {
     registerUser,
     logoutUser,
     userStatus,
+    formLoader,
+    setFormLoader,
   };
   return (
     <AuthContext.Provider value={contextValue}>

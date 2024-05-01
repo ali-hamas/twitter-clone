@@ -1,17 +1,18 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import { Home, Explore, Auth, SignIn, SignUp } from "./pages";
 import { Layout, SecureRoutes, OpenRoutes } from "./utils";
+import { Home, Tweet, Profile, Auth, SignIn, SignUp } from "./pages";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route element={<Layout />}>
-            <Route element={<SecureRoutes />}>
+          <Route element={<SecureRoutes />}>
+            <Route element={<Layout />}>
               <Route path="/home" element={<Home />}></Route>
-              <Route path="/explore" element={<Explore />}></Route>
+              <Route path="/tweet/:id" element={<Tweet />}></Route>
+              <Route path="/user/:id" element={<Profile />}></Route>
             </Route>
           </Route>
           <Route element={<OpenRoutes />}>
@@ -19,6 +20,7 @@ function App() {
             <Route path="/signin" element={<SignIn />}></Route>
             <Route path="/signup" element={<SignUp />}></Route>
           </Route>
+          <Route path="*" element={<Navigate to={"/"} />}></Route>
         </Routes>
       </BrowserRouter>
       {/* Toaster */}
@@ -27,6 +29,7 @@ function App() {
         toastOptions={{
           duration: 3000,
           style: {
+            borderRadius: "9999px",
             background: "var(--accentColor)",
             color: "var(--primaryTxt)",
           },

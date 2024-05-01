@@ -14,3 +14,18 @@ export const tweetsCollectionId = import.meta.env
   .VITE_APPWRITE_TWEETS_COLLECTION_ID;
 export const trendsCollectionId = import.meta.env
   .VITE_APPWRITE_TRENDS_COLLECTION_ID;
+export const followCollectionId = import.meta.env
+  .VITE_APPWRITE_FOLLOW_COLLECTION_ID;
+
+export const apiBaseUrl = import.meta.env.VITE_APPWRITE_ENDPOINT;
+
+export const serverHeaders = {
+  "Content-Type": "application/json",
+  "X-Appwrite-Project": import.meta.env.VITE_APPWRITE_PROJECT_ID,
+  "X-Appwrite-Key": import.meta.env.VITE_APPWRITE_API_KEY,
+};
+
+export const headers = {
+  "Content-Type": "application/json",
+  "X-Appwrite-Project": import.meta.env.VITE_APPWRITE_PROJECT_ID,
+};
