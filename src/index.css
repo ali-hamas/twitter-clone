@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --accentColor: 29 155 240;
+
+  --primaryTxt: 231 233 234;
+  --secondryTxt: 113 118 123;
+  --primaryBg: 0 0 0;
+  --secondryBg: 33 35 39;
+  --hoverBg: 23 23 23;
+  --borderColor: 47 51 54;
+  --popupBg: rgb(91 112 131 / 0.4);
+}
+[theme-mode="light"] {
+  --primaryTxt: 15 20 25;
+  --secondryTxt: 84 100 113;
+  --primaryBg: 254 254 254;
+  --secondryBg: 240 244 245;
+  --hoverBg: 231 231 231;
+  --borderColor: 239 243 244;
+  --popupBg: rgb(0 0 0 / 0.4);
+}
+[theme-mode="dim"] {
+  --primaryTxt: 231 233 234;
+  --secondryTxt: 113 118 123;
+  --primaryBg: 21 32 43;
+  --secondryBg: 40 51 64;
+  --hoverBg: 43 53 63;
+  --borderColor: 47 51 54;
+  --popupBg: rgb(91 112 131 / 0.4);
+}
+[theme-accent="green"] {
+  --accentColor: 0 186 124;
+}
+[theme-accent="pink"] {
+  --accentColor: 249 24 128;
+}
+[theme-accent="yellow"] {
+  --accentColor: 255 213 0;
+}
+[theme-accent="purple"] {
+  --accentColor: 120 87 255;
+}
+[theme-accent="orange"] {
+  --accentColor: 255 123 0;
+}
