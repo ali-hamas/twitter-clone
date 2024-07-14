@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .spinner {
+    @apply border-border border-b-accent mx-auto my-10 size-7 animate-spin rounded-full border-[3px];
+  }
+  .text-field {
+    @apply border-border focus:border-accent focus:ring-accent border ring-1 ring-transparent;
+  }
+  .cross-btn {
+    @apply text-accent bg-primaryBg hover:bg-hoverBg absolute left-1.5 top-1.5 rounded-full p-2;
+  }
+}
+
+@layer base {
+  input[type="file"] {
+    @apply hidden;
+  }
+  [tooltip] {
+    @apply relative;
+  }
+  [tooltip]:after {
+    @apply transition-300 bg-tooltipBg invisible absolute -bottom-6 left-1/2 z-0 -translate-x-1/2 whitespace-nowrap rounded-[4px] px-1 py-0.5 text-[11px] -tracking-normal text-[#fff] shadow-xl content-[attr(tooltip)];
+  }
+  [tooltip]:hover::after {
+    @apply transition-300 delay-500 md:visible;
+  }
+}
+
 :root {
   --accentColor: 29 155 240;
 
