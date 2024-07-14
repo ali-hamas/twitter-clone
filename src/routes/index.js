@@ -1,4 +1,4 @@
-import SecureLayout from "./SecureLayout";
+import SecureRoutes from "./SecureRoutes";
 import OpenRoutes from "./OpenRoutes";
 
-export { SecureLayout, OpenRoutes };
+export { SecureRoutes, OpenRoutes };

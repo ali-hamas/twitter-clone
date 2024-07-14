@@ -1,6 +1,6 @@
 import { ID, Query } from "appwrite";
+import { usersCollectionId } from "./config";
 import { account, databases, databaseId } from "./config";
-import { usersCollectionId, tweetsCollectionId } from "./config";
 
 export const checkUsername = async (username) => {
   console.log("user check request", username);
@@ -42,4 +42,13 @@ export const createDbUser = async (id, profile_name, profile_username) => {
 
 export const getDBUser = async (id) => {
   return await databases.getDocument(databaseId, usersCollectionId, id);
+};
+
+export const getUsers = async (userId) => {
+  let response =  await databases.listDocuments(databaseId, usersCollectionId, [
+    Query.limit(3),
+    Query.orderDesc("$createdAt"),
+    Query.notEqual("$id", [userId]),
+  ]);
+  return response.documents;
 };

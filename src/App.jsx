@@ -1,6 +1,6 @@
 import { Toaster } from "react-hot-toast";
 import { Auth, SignUp, SignIn } from "@/pages";
-import { SecureLayout, OpenRoutes } from "@/routes";
+import { SecureRoutes, OpenRoutes } from "@/routes";
 import { Feed, Bookmarks, Users, Profile, Tweet } from "@/pages";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
@@ -9,7 +9,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route element={<SecureLayout />}>
+          <Route element={<SecureRoutes />}>
             <Route path="/home" element={<Feed />}></Route>
             <Route path="/bookmarks" element={<Bookmarks />}></Route>
             <Route path="/users" element={<Users />}></Route>
