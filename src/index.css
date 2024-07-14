@@ -12,6 +12,12 @@
   .cross-btn {
     @apply text-accent bg-primaryBg hover:bg-hoverBg absolute left-1.5 top-1.5 rounded-full p-2;
   }
+  .profile-name {
+    @apply text-15 text-primaryTxt w-fit font-bold;
+  }
+  .profile-username {
+    @apply text-15 text-secondryTxt font-regular w-fit;
+  }
 }
 
 @layer base {
@@ -72,4 +78,15 @@
 }
 [theme-accent="orange"] {
   --accentColor: 255 123 0;
+}
+
+::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  background-size: 20px 20px;
+  margin-left: 5px;
+  cursor: pointer;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%231D9BF0" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>');
 }
