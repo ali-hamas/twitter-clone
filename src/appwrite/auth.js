@@ -44,9 +44,9 @@ export const getDBUser = async (id) => {
   return await databases.getDocument(databaseId, usersCollectionId, id);
 };
 
-export const getUsers = async (userId) => {
-  let response =  await databases.listDocuments(databaseId, usersCollectionId, [
-    Query.limit(3),
+export const getUsers = async (userId, limit) => {
+  let response = await databases.listDocuments(databaseId, usersCollectionId, [
+    Query.limit(limit),
     Query.orderDesc("$createdAt"),
     Query.notEqual("$id", [userId]),
   ]);

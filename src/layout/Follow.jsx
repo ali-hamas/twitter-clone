@@ -14,7 +14,7 @@ const Follow = () => {
   const fetchAsideUsers = async () => {
     try {
       setLoading(true);
-      let response = await getUsers(user.$id);
+      let response = await getUsers(user.$id, 3);
       setUserData(response);
     } catch (error) {
       console.log(error);
