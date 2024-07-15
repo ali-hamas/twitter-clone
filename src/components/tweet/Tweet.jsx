@@ -1,10 +1,10 @@
 import { cn } from "@/utils/cn";
 import { useState } from "react";
-import { useDate } from "@/hooks";
 import { LinkIcon } from "@/icons";
 import { useAuth } from "@/contexts";
 import { Link } from "react-router-dom";
 import { copyLink } from "@/utils/utils";
+import { useDate, useFormat } from "@/hooks";
 import { BookmarkIcon, CommentIcon } from "@/icons/TweetIcons";
 import { ProfileImage, ProfileUsername, ProfileName } from "../user";
 import { LikeIcon, RetweetIcon, ShareIcon } from "@/icons/TweetIcons";
@@ -12,6 +12,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 
 const Tweet = ({ tweetData, userData }) => {
   const { user } = useAuth();
+  const tweetText = useFormat(tweetData.tweet_body);
   const [like, setLike] = useState(tweetData.liked_by.includes(user.$id));
   const [bookmark, setBookmark] = useState(tweetData.bookmark_by.includes(user.$id));
 
@@ -38,7 +39,7 @@ const Tweet = ({ tweetData, userData }) => {
           </span>
         </div>
         <p className="text-base font-regular text-primaryTxt mt-1">
-          {tweetData.tweet_body}
+          {tweetText}
         </p>
         <div className="mt-2 flex h-6 w-full items-center justify-between *:cursor-pointer">
           <button tooltip="Reply" className="group tweet-btn" onClick={noRoute}>

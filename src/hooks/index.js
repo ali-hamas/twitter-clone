@@ -1,3 +1,4 @@
 import useDate from "./useDate";
+import useFormat from "./useFormat";
 
-export { useDate };
+export { useDate, useFormat };
