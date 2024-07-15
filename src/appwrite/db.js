@@ -12,3 +12,11 @@ export const createTweet = async (tweet_body, userId) => {
     },
   );
 };
+
+export const getTweets = async (limit) => {
+  let response = await databases.listDocuments(databaseId, tweetsCollectionId, [
+    Query.limit(limit),
+    Query.orderDesc("$createdAt"),
+  ]);
+  return response.documents;
+};

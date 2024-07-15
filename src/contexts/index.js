@@ -1,3 +1,4 @@
 import { useAuth } from "./AuthContext";
+import { useTweet } from "./TweetContext";
 
-export { useAuth };
+export { useAuth, useTweet };
