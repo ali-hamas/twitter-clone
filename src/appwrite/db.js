@@ -1,2 +1,14 @@
 import { ID, Query } from "appwrite";
-import { databases, tweetsCollectionId, usersCollectionId } from "./config";
+import { databaseId, databases, tweetsCollectionId } from "./config";
+
+export const createTweet = async (tweet_body, userId) => {
+  return await databases.createDocument(
+    databaseId,
+    tweetsCollectionId,
+    ID.unique(),
+    {
+      tweet_body,
+      user: userId,
+    },
+  );
+};
