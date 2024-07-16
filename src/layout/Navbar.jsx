@@ -10,7 +10,6 @@ import { MessageIcon, BookmarkIcon, ProfileIcon } from "@/icons/NavbarIcons";
 const Navbar = () => {
   const { user, logoutUser } = useAuth();
   const pathname = useLocation().pathname;
-  console.log(user);
 
   const noRoute = (e) => {
     e.preventDefault();
@@ -92,9 +91,8 @@ const Navbar = () => {
             <DotsIcon className="fill-primaryTxt" />
           </div>
         </MenuButton>
-        <MenuItems transition="true" anchor={{ to: "top start", gap: "10px" }}
-          className="bg-primaryBg shadow-twitter flex w-64 origin-top flex-col rounded-lg transition duration-150 ease-out data-[closed]:scale-95 data-[closed]:opacity-0">
-          <button className="transition-200 hover:bg-danger/10 text-15 text-danger px-4 py-3 text-left font-bold" onClick={logoutUser}>
+        <MenuItems transition="true" anchor={{ to: "top start", gap: "10px" }} className="transition-menu w-64 origin-top">
+          <button className="menu-item hover:bg-red/10 text-red" onClick={logoutUser}>
             {`Log out of @${user.profile_username}`}
           </button>
         </MenuItems>

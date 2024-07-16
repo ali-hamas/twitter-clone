@@ -18,20 +18,42 @@
   .profile-username {
     @apply text-15 text-secondryTxt font-regular w-fit;
   }
+  .form-btn {
+    @apply flex-center transition-200 text-secondryTxt hover:bg-accent/20 size-7 cursor-not-allowed rounded-full opacity-50;
+  }
+  .tweet-btn {
+    @apply transition-200 hover:bg-blue/30 text-secondryTxt rounded-full p-1;
+  }
+  .tweet-btn-txt {
+    @apply text-secondryTxt text-13 group-hover:text-pink transition-200;
+  }
+  .disabled {
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .menu-item {
+    @apply transition-200 text-15 hover:bg-hoverBg/60 flex items-center gap-3 px-4 py-3 text-left font-bold;
+  }
+  .transition-menu {
+    @apply bg-primaryBg shadow-twitter flex flex-col rounded-lg transition duration-150 ease-out data-[closed]:scale-95 data-[closed]:opacity-0;
+  }
 }
 
 @layer base {
-  input[type="file"] {
-    @apply hidden;
-  }
   [tooltip] {
     @apply relative;
   }
   [tooltip]:after {
-    @apply transition-300 bg-tooltipBg invisible absolute -bottom-6 left-1/2 z-0 -translate-x-1/2 whitespace-nowrap rounded-[4px] px-1 py-0.5 text-[11px] -tracking-normal text-[#fff] shadow-xl content-[attr(tooltip)];
+    @apply transition-300 invisible absolute -bottom-7 left-1/2 z-0 -translate-x-1/2 whitespace-nowrap rounded-[4px] bg-[#485a68] px-1 py-0.5 text-[11px] text-white shadow-xl content-[attr(tooltip)];
   }
   [tooltip]:hover::after {
     @apply transition-300 delay-500 md:visible;
+  }
+  [aria-current="page"] {
+    @apply font-bold;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    @apply font-chirp text-secondryTxt;
   }
 }
 
