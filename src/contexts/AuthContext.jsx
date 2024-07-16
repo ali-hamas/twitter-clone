@@ -1,6 +1,7 @@
 import { TwitterIcon } from "@/icons";
-import { createDbUser, getDBUser } from "@/appwrite/auth";
+import { getTweets } from "@/appwrite/db";
 import { registerAccount, loginAccount } from "@/appwrite/auth";
+import { createDbUser, getDBUser, getUsers } from "@/appwrite/auth";
 import { createContext, useState, useEffect, useContext } from "react";
 import { logoutAccount, getAccount, checkUsername } from "@/appwrite/auth";
 
@@ -16,7 +17,9 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [tweets, setTweets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [asideUsers, setAsideUsers] = useState([]);
 
   useEffect(() => {
     getUser();
@@ -49,9 +52,11 @@ export const AuthProvider = ({ children }) => {
   const getUser = async () => {
     try {
       const logedInUser = await getAccount();
-      console.log("account get request", logedInUser);
       let dbUser = await getDBUser(logedInUser.$id);
-      console.log("db user request", dbUser);
+      let asideUsers = await getUsers(logedInUser.$id, 3);
+      setAsideUsers(asideUsers);
+      let allTweets = await getTweets(25);
+      setTweets(allTweets);
       setUser(dbUser);
     } catch (error) {
       console.log(error);
@@ -60,7 +65,15 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const contextValue = { user, registerUser, loginUser, logoutUser };
+  const contextValue = {
+    user,
+    registerUser,
+    loginUser,
+    logoutUser,
+    asideUsers,
+    tweets,
+    setTweets,
+  };
 
   return (
     <AuthContext.Provider value={contextValue}>

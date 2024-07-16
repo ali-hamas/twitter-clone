@@ -1,18 +1,17 @@
 import { Header } from "@/layout";
 import { LinkIcon } from "@/icons";
+import { useAuth } from "@/contexts";
 import { copyLink } from "@/utils/utils";
 import { getIdTweet } from "@/appwrite/db";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDate, useFormat } from "@/hooks";
-import { useAuth, useTweet } from "@/contexts";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ProfileImage, ProfileName, ProfileUsername } from "@/components/user";
 import { LikeIcon, RetweetIcon, ShareIcon, CommentIcon, BookmarkIcon } from "@/icons/TweetIcons";
 
 const Tweet = () => {
   const { user } = useAuth();
-  const { tweets } = useTweet();
   const { tweetId } = useParams();
   const [liked, setLiked] = useState(null);
   const [tweet, setTweet] = useState(null);
