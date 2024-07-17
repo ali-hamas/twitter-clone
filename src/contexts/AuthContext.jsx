@@ -62,6 +62,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const updateTweets = (tweetId, updatedtweet) => {
+    setTweets((prevArray) =>
+      prevArray.map((i) => (i.$id === tweetId ? updatedtweet : i)),
+    );
+  };
+
   const newTweet = async (tweetValue) => {
     let newTweet = await createTweet(tweetValue, user.$id);
     setTweets((prevState) => [newTweet, ...prevState]);
@@ -73,6 +79,7 @@ export const AuthProvider = ({ children }) => {
     loginUser,
     logoutUser,
     tweets,
+    updateTweets,
     newTweet,
   };
 

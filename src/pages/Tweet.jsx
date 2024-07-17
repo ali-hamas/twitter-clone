@@ -1,59 +1,96 @@
 import { Header } from "@/layout";
-import { LinkIcon } from "@/icons";
 import { useAuth } from "@/contexts";
 import { copyLink } from "@/utils/utils";
-import { getIdTweet } from "@/appwrite/db";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDate, useFormat } from "@/hooks";
+import { ErrorIcon, LinkIcon } from "@/icons";
+import { useEffect, useRef, useState } from "react";
+import { bookmarkTweet, getIdTweet, likeTweet } from "@/appwrite/db";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
-import { ProfileImage, ProfileName, ProfileUsername } from "@/components/user";
+import { FollowButton, ProfileImage, ProfileName, ProfileUsername } from "@/components/user";
 import { LikeIcon, RetweetIcon, ShareIcon, CommentIcon, BookmarkIcon } from "@/icons/TweetIcons";
 
 const Tweet = () => {
-  const { user } = useAuth();
+  const likeRef = useRef(null);
   const { tweetId } = useParams();
-  const [liked, setLiked] = useState(null);
+  const bookmarkRef = useRef(null);
   const [tweet, setTweet] = useState(null);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [bookmarked, setBookmarked] = useState(null);
-
-  const handleLike = () => {
-    setLiked((prevState) => !prevState);
+  const { user, tweets, updateTweets } = useAuth();
+  const liked = tweet?.liked_by.includes(user.$id);
+  const bookmarked = tweet?.bookmark_by.includes(user.$id);
+  if (tweet) {
+    document.title = `${tweet.user.profile_name} on Twitter: "${tweet.tweet_body}"`;
   }
-  const handleBookmark = () => {
-    setBookmarked((prevState) => !prevState);
-  }
-
   const fetchTweet = async () => {
     try {
       setLoading(true);
-      let res = await getIdTweet(tweetId);
-      document.title = `${res.user.profile_name} on Twitter: "${res.tweet_body}"`;
-      setTweet(res);
-      setLiked(res.liked_by.includes(user.$id));
-      setBookmarked(res.bookmark_by.includes(user.$id));
+      let filterTweet = tweets.find((i) => i.$id === tweetId);
+      if (filterTweet) {
+        setTweet(filterTweet);
+      } else {
+        let res = await getIdTweet(tweetId);
+        setTweet(res);
+      }
     } catch (error) {
       console.log(error);
+      setError(error.message);
     } finally {
       setLoading(false);
     }
   }
+  const handleLike = async () => {
+    likeRef.current.setAttribute("disabled", true);
+    let res = await likeTweet(liked, tweet, user.$id);
+    updateTweets(tweetId, res);
+    setTweet(res);
+    likeRef.current.removeAttribute("disabled");
+  }
+  const handleBookmark = async () => {
+    bookmarkRef.current.setAttribute("disabled", true);
+    let res = await bookmarkTweet(bookmarked, tweet, user.$id);
+    updateTweets(tweetId, res);
+    setTweet(res);
+    bookmarkRef.current.removeAttribute("disabled");
+  }
+
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0 });
     fetchTweet();
   }, [tweetId]);
 
+  if (error) {
+    return (
+      <>
+        <Header title="Tweet" />
+        <section className="flex-center flex-col gap-3 mt-20">
+          <ErrorIcon className="size-14" />
+          <p className="text-center text-17 text-secondryTxt">
+          {error.includes("Document with the requested ID could not be found") ? (
+            "This tweet doesn't exist"
+          ) : (
+            "Something went wrong, try reloading"
+          )}
+          </p>
+        </section>
+      </>
+    );
+  }
+  
   return (
     <>
       <Header title="Tweet" />
       {!loading ? (
-        <section className="border-b border-b-border px-3 pt-3 md:px-4 mb-96">
+        <article className="border-b border-b-border px-3 pt-3 md:px-4 mb-[100dvh]">
           <div className="flex items-center gap-3">
             <ProfileImage data={tweet.user} />
             <div>
               <ProfileName data={tweet.user} />
               <ProfileUsername data={tweet.user} />
+            </div>
+            <div className="ml-auto">
+              <FollowButton profileData={tweet.user} />
             </div>
           </div>
           <div className="mt-3">
@@ -64,19 +101,10 @@ const Tweet = () => {
           <div className="flex w-full items-center gap-1.5 border-b border-b-border py-3 text-secondryTxt">
             <p>{useDate(tweet.$createdAt)}</p>
             <span>·</span>
-            <p className="cursor-pointer underline-offset-2 hover:underline">
+            <p>
               <span className="text-primaryTxt">{tweet.liked_by.length}</span>
               {tweet.liked_by === 1 ? " Like" : " Likes"}
             </p>
-            {tweet.user.$id === user.$id && (
-              <>
-                <span>·</span>
-                <p className="cursor-pointer underline-offset-2 hover:underline">
-                  <span className="text-primaryTxt">{tweet.bookmark_by.length}</span>
-                  {tweet.bookmark_by === 1 ? " Bookmark" : " Bookmarks"}
-                </p>
-              </>
-            )}
           </div>
           <div className="flex py-3 w-full items-center justify-between *:cursor-pointer">
             <button tooltip="Reply" className="group tweet-btn">
@@ -85,10 +113,10 @@ const Tweet = () => {
             <button tooltip="Retweet" className="group tweet-btn hover:bg-green/30">
               <RetweetIcon className="group-hover:fill-green" />
             </button>
-            <button tooltip="Like" className="group tweet-btn hover:bg-pink/30" onClick={handleLike}>
+            <button tooltip="Like" className="group tweet-btn hover:bg-pink/30" ref={likeRef} onClick={handleLike}>
               <LikeIcon className="group-hover:fill-pink" solid={liked} />
             </button>
-            <button tooltip="Bookmark" className="group tweet-btn" onClick={handleBookmark}>
+            <button tooltip="Bookmark" className="group tweet-btn" ref={bookmarkRef} onClick={handleBookmark}>
               <BookmarkIcon className="group-hover:fill-blue" solid={bookmarked} />
             </button>
             <Menu>
@@ -105,7 +133,7 @@ const Tweet = () => {
               </MenuItems>
             </Menu>
           </div>
-        </section> 
+        </article> 
       ) : (
       <div className="spinner" />
     )}
