@@ -4,37 +4,40 @@
 
 @layer components {
   .spinner {
-    @apply border-border border-b-accent mx-auto my-10 size-7 animate-spin rounded-full border-[3px];
+    @apply mx-auto my-10 size-7 animate-spin rounded-full border-[3px] border-border border-b-accent;
   }
   .text-field {
-    @apply border-border focus:border-accent focus:ring-accent border ring-1 ring-transparent;
+    @apply border border-border ring-1 ring-transparent focus:border-accent focus:ring-accent;
   }
   .cross-btn {
-    @apply text-accent bg-primaryBg hover:bg-hoverBg absolute left-1.5 top-1.5 rounded-full p-2;
+    @apply absolute left-1.5 top-1.5 rounded-full bg-primaryBg p-2 text-accent hover:bg-hoverBg;
   }
   .profile-name {
-    @apply text-15 text-primaryTxt w-fit font-bold;
+    @apply w-fit text-15 font-bold text-primaryTxt;
   }
   .profile-username {
-    @apply text-15 text-secondryTxt font-regular w-fit;
+    @apply w-fit text-15 font-regular text-secondryTxt;
   }
   .form-btn {
-    @apply flex-center transition-200 text-secondryTxt hover:bg-accent/20 size-7 cursor-not-allowed rounded-full opacity-50;
+    @apply flex-center transition-200 size-7 cursor-not-allowed rounded-full text-secondryTxt opacity-50 hover:bg-accent/20;
   }
   .tweet-btn {
-    @apply transition-200 hover:bg-blue/30 text-secondryTxt rounded-full p-1;
+    @apply transition-200 !cursor-pointer rounded-full p-1 text-secondryTxt hover:bg-blue/30 disabled:cursor-pointer;
   }
   .tweet-btn-txt {
-    @apply text-secondryTxt text-13 group-hover:text-pink transition-200;
+    @apply transition-200 text-13 text-secondryTxt group-hover:text-pink;
   }
   .disabled {
     @apply disabled:cursor-not-allowed disabled:opacity-50;
   }
   .menu-item {
-    @apply transition-200 text-15 hover:bg-hoverBg/60 flex items-center gap-3 px-4 py-3 text-left font-bold;
+    @apply transition-200 flex items-center gap-3 px-4 py-3 text-left text-15 font-bold hover:bg-hoverBg/60;
   }
   .transition-menu {
-    @apply bg-primaryBg shadow-twitter flex flex-col rounded-lg transition duration-150 ease-out data-[closed]:scale-95 data-[closed]:opacity-0;
+    @apply flex flex-col rounded-lg bg-primaryBg shadow-twitter transition duration-150 ease-out data-[closed]:scale-95 data-[closed]:opacity-0;
+  }
+  .header {
+    @apply sticky top-0 z-10 w-full border-b border-b-border bg-primaryBg/50 px-4 py-2 shadow-sm backdrop-blur-md;
   }
 }
 
