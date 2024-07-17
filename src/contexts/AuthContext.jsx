@@ -1,7 +1,7 @@
 import { TwitterIcon } from "@/icons";
-import { getTweets } from "@/appwrite/db";
+import { createTweet, getTweets } from "@/appwrite/db";
+import { createDbUser, getDBUser } from "@/appwrite/auth";
 import { registerAccount, loginAccount } from "@/appwrite/auth";
-import { createDbUser, getDBUser, getUsers } from "@/appwrite/auth";
 import { createContext, useState, useEffect, useContext } from "react";
 import { logoutAccount, getAccount, checkUsername } from "@/appwrite/auth";
 
@@ -19,7 +19,6 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [tweets, setTweets] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [asideUsers, setAsideUsers] = useState([]);
 
   useEffect(() => {
     getUser();
@@ -53,8 +52,6 @@ export const AuthProvider = ({ children }) => {
     try {
       const logedInUser = await getAccount();
       let dbUser = await getDBUser(logedInUser.$id);
-      let asideUsers = await getUsers(logedInUser.$id, 3);
-      setAsideUsers(asideUsers);
       let allTweets = await getTweets(25);
       setTweets(allTweets);
       setUser(dbUser);
@@ -65,14 +62,18 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const newTweet = async (tweetValue) => {
+    let newTweet = await createTweet(tweetValue, user.$id);
+    setTweets((prevState) => [newTweet, ...prevState]);
+  };
+
   const contextValue = {
     user,
     registerUser,
     loginUser,
     logoutUser,
-    asideUsers,
     tweets,
-    setTweets,
+    newTweet,
   };
 
   return (
