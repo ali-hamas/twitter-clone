@@ -7,7 +7,10 @@ const useDate = ($createdAt, type) => {
     if (currentYear === tweetYear) {
       return format($createdAt, "dd MMM");
     }
-    return format($createdAt, "dd MMM YYYY");
+    return format($createdAt, "dd MMM yyyy");
+  }
+  if (type === "profile") {
+    return format($createdAt, "MMMM yyyy");
   } else {
     return format($createdAt, "h:mm a · dd MMMM yyyy");
   }
