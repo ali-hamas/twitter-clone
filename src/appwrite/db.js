@@ -63,3 +63,35 @@ export const getProfileTweets = async (userId, limit, offset) => {
   ])
   return res.documents;
 }
+
+export const likeTweet = async (liked, tweetData, userId) => {
+  if (liked) {
+    const payload = tweetData.liked_by.filter((i) => i !== userId);
+    let res = await databases.updateDocument(databaseId, tweetsCollectionId, tweetData.$id, {
+      liked_by: payload,
+    });
+    return res;
+  } else {
+    const payload = [...tweetData.liked_by, userId];
+    let res = await databases.updateDocument(databaseId, tweetsCollectionId, tweetData.$id, {
+      liked_by: payload,
+    });
+    return res;
+  }
+}
+
+export const bookmarkTweet = async (bookmarked, tweetData, userId) => {
+  if (bookmarked) {
+    const payload = tweetData.bookmark_by.filter((i) => i !== userId);
+    let res = await databases.updateDocument(databaseId, tweetsCollectionId, tweetData.$id, {
+      bookmark_by: payload,
+    });
+    return res;
+  } else {
+    const payload = [...tweetData.bookmark_by, userId];
+    let res = await databases.updateDocument(databaseId, tweetsCollectionId, tweetData.$id, {
+      bookmark_by: payload,
+    });
+    return res;
+  }
+};
