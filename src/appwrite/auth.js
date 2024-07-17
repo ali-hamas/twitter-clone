@@ -52,3 +52,14 @@ export const getUsers = async (userId, limit) => {
   ]);
   return response.documents;
 };
+
+export const getProfileUser = async (username) => {
+  let res = await databases.listDocuments(databaseId, usersCollectionId, [
+    Query.equal("profile_username", [username]),
+  ]);
+  if (res.total === 0) {
+    throw new Error("User not found");
+  } else {
+    return res.documents[0];
+  }
+};
