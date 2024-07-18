@@ -22,7 +22,7 @@
     @apply flex-center transition-200 size-7 cursor-not-allowed rounded-full text-secondryTxt opacity-50 hover:bg-accent/20;
   }
   .tweet-btn {
-    @apply transition-200 !cursor-pointer rounded-full p-1 text-secondryTxt hover:bg-blue/30 disabled:cursor-pointer;
+    @apply transition-200 cursor-pointer rounded-full p-1 text-secondryTxt lg:hover:bg-blue/30;
   }
   .tweet-btn-txt {
     @apply transition-200 text-13 text-secondryTxt group-hover:text-pink;
