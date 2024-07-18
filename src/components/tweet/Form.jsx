@@ -2,15 +2,16 @@ import { cn } from "@/utils/cn";
 import toast from "react-hot-toast";
 import { useAuth } from "@/contexts";
 import { ProfileImage } from "../user";
+import { createTweet } from "@/appwrite/db";
 import { Transition } from '@headlessui/react';
 import { useEffect, useRef, useState } from "react";
 import { EmojiIcon, GifIcon, MediaIcon } from "@/icons/FormIcons";
 import { CalenderIcon, LocationIcon, GlobeIcon } from "@/icons/FormIcons";
 
 const Form = ({ dialog }) => {
+  const { user } = useAuth();
   const submitRef = useRef(null);
   const textAreaRef = useRef(null);
-  const { user, newTweet } = useAuth();
   const maxLength = user.verified ? 500 : 300;
   const [formValue, setFormValue] = useState("");
   const remainingWords = maxLength - formValue.length;
@@ -25,7 +26,7 @@ const Form = ({ dialog }) => {
   const handleSubmit = async () => {
     try {
       submitRef.current.classList.add("bg-accent");
-      await newTweet(formValue);
+      await createTweet(formValue, user.$id);
       toast.success("Your tweet has been sent");
     } catch (error) {
       console.log(error);

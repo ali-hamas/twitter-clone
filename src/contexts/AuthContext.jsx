@@ -1,9 +1,10 @@
 import { TwitterIcon } from "@/icons";
-import { createTweet, getTweets } from "@/appwrite/db";
+import { getTweets } from "@/appwrite/db";
 import { createDbUser, getDBUser } from "@/appwrite/auth";
 import { registerAccount, loginAccount } from "@/appwrite/auth";
 import { createContext, useState, useEffect, useContext } from "react";
 import { logoutAccount, getAccount, checkUsername } from "@/appwrite/auth";
+import { client, databaseId, tweetsCollectionId } from "@/appwrite/config";
 
 const ScreenLoader = () => {
   return (
@@ -22,6 +23,13 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     getUser();
+
+    client.subscribe(`databases.${databaseId}.collections.${tweetsCollectionId}.documents`, (response) => {
+      console.log("subscribed");
+      if (response.events.includes("databases.*.collections.*.documents.*.create")) {
+        setTweets((prevTweets) => [response.payload, ...prevTweets]);
+      }
+    });
   }, []);
 
   const registerUser = async (email, password, name, username) => {
@@ -68,11 +76,6 @@ export const AuthProvider = ({ children }) => {
     );
   };
 
-  const newTweet = async (tweetValue) => {
-    let newTweet = await createTweet(tweetValue, user.$id);
-    setTweets((prevState) => [newTweet, ...prevState]);
-  };
-
   const contextValue = {
     user,
     registerUser,
@@ -80,7 +83,6 @@ export const AuthProvider = ({ children }) => {
     logoutUser,
     tweets,
     updateTweets,
-    newTweet,
   };
 
   return (
