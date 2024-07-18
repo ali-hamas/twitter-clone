@@ -26,7 +26,7 @@ const Form = ({ dialog }) => {
   const handleSubmit = async () => {
     try {
       submitRef.current.classList.add("bg-accent");
-      await createTweet(formValue, user.$id);
+      await createTweet(formValue, user);
       toast.success("Your tweet has been sent");
     } catch (error) {
       console.log(error);

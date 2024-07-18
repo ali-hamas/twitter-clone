@@ -94,7 +94,7 @@ const Profile = () => {
             </h1>
             {profileUser.verified && <VerifiedIcon className="lg:size-5 lg:min-w-5" />}
           </div>
-          <p className="w-fit text-13 text-secondryTxt">{`${profileUser.tweets.length} tweets`}</p>
+          <p className="w-fit text-13 text-secondryTxt">{`${profileUser.total_tweets} tweets`}</p>
         </div>
       </header>
       <section className="relative w-full">

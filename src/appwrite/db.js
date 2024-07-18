@@ -2,11 +2,15 @@ import { ID, Query } from "appwrite";
 import { databaseId, databases } from "./config";
 import { tweetsCollectionId, usersCollectionId } from "./config";
 
-export const createTweet = async (tweet_body, userId) => {
-  return await databases.createDocument(databaseId, tweetsCollectionId, ID.unique(), {
-      tweet_body, user: userId,
-    },
-  );
+export const createTweet = async (tweet_body, user) => {
+  let res = await databases.createDocument(databaseId, tweetsCollectionId, ID.unique(), {
+    tweet_body,
+    user: user.$id,
+  });
+  await databases.updateDocument(databaseId, usersCollectionId, user.$id, {
+    total_tweets: user.total_tweets + 1,
+  });
+  return res;
 };
 
 export const getTweets = async (limit) => {
