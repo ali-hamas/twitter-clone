@@ -30,7 +30,7 @@ const Bookmarks = () => {
         {!loading ? (
           bookmarks.length > 0 ? (
             bookmarks.map((data) => (
-              <Tweet key={data.$id} data={data} />
+              <Tweet key={data.$id} tweet={data} />
             ))
           ) : (
             <div className="mx-auto flex w-[90%] flex-col items-center justify-center mt-10 gap-2 md:w-2/3">

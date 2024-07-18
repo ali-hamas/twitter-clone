@@ -177,7 +177,7 @@ const Profile = () => {
       </section>
       <section className="pb-96">
         {profileUser.tweets.length > 0 ? (
-          profileUser.tweets.map((data) => <Tweet key={data.$id} data={data} />)
+          profileUser.tweets.map((data) => <Tweet key={data.$id} tweet={data} />)
         ) : (
           <div className="mt-5">
             <h1 className="text-center text-20 font-black lg:text-3xl">{`@${username} hasn't tweeted`}</h1>
