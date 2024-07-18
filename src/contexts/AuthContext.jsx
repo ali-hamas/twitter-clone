@@ -2,6 +2,7 @@ import { TwitterIcon } from "@/icons";
 import { createDbUser, getDBUser } from "@/appwrite/auth";
 import { registerAccount, loginAccount } from "@/appwrite/auth";
 import { createContext, useState, useEffect, useContext } from "react";
+import { client, databaseId, usersCollectionId } from "@/appwrite/config";
 import { logoutAccount, getAccount, checkUsername } from "@/appwrite/auth";
 
 const ScreenLoader = () => {
@@ -19,7 +20,14 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getUser();
+    (async () => {
+      let res = await getUser();
+      client.subscribe(`databases.${databaseId}.collections.${usersCollectionId}.documents.${res.$id}`, (response) => {
+        if (response.events.includes("databases.*.collections.*.documents.*.update")) {
+          setUser(response.payload);
+        }
+      });
+    })()
   }, []);
 
   const registerUser = async (email, password, name, username) => {
@@ -51,6 +59,7 @@ export const AuthProvider = ({ children }) => {
       const logedInUser = await getAccount();
       let dbUser = await getDBUser(logedInUser.$id);
       setUser(dbUser);
+      return dbUser;
     } catch (error) {
       console.log(error);
     } finally {
