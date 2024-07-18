@@ -4,11 +4,12 @@ import App from "./App.jsx";
 import "./index.css";
 import "./fonts/fonts.css";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
+import { TweetProvider } from "./contexts/TweetsContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <AuthProvider>
+  <AuthProvider>
+    <TweetProvider>
       <App />
-    </AuthProvider>
-  </React.StrictMode>,
+    </TweetProvider>
+  </AuthProvider>,
 );
