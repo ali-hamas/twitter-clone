@@ -41,7 +41,7 @@ const Profile = () => {
   if (loading) {
     return (
       <>
-        <header className="header z-[2] flex items-center gap-5">
+        <header className="header z-[2] flex items-center gap-5 min-h-16">
           <BackButton />
           <div>
             <div className="h-6 w-36 animate-pulse rounded-md bg-secondryBg lg:h-7" />
@@ -49,8 +49,8 @@ const Profile = () => {
           </div>
         </header>
         <section className="h-32 w-full animate-pulse overflow-hidden border-b border-b-border bg-secondryBg md:h-50" />
-        <section className="relative z-[1] -mt-12 px-2 lg:-mt-[70px] lg:px-4">
-          <div className="size-24 overflow-hidden rounded-full border-4 border-primaryBg bg-secondryBg md:size-[140px]" />
+        <section className="relative z-[1] -mt-12 px-2 md:-mt-[70px] lg:px-4">
+          <div className="size-24 xs:size-32 md:size-36 overflow-hidden rounded-full border-4 border-primaryBg bg-secondryBg" />
         </section>
         <div className="spinner" />
       </>
@@ -65,8 +65,8 @@ const Profile = () => {
           <h1 className="text-17 font-black md:text-xl">User</h1>
         </header>
         <section className="h-32 w-full overflow-hidden border-b border-b-border bg-secondryBg md:h-50" />
-        <section className="relative z-[1] -mt-12 px-2 lg:-mt-[70px] lg:px-4">
-          <div className="size-24 overflow-hidden rounded-full border-4 border-primaryBg bg-secondryBg md:size-[140px]" />
+        <section className="relative z-[1] -mt-[52px] md:-mt-[80px] px-2 lg:px-4">
+          <div className="size-24 overflow-hidden rounded-full border-4 border-primaryBg bg-secondryBg" />
         </section>
         <section className="px-2 py-3 lg:px-4">
           <h1 className="text-20/5 font-black lg:text-2xl/6">
@@ -97,16 +97,16 @@ const Profile = () => {
           <p className="w-fit text-13 text-secondryTxt">{`${profileUser.total_tweets} tweets`}</p>
         </div>
       </header>
-      <section className="relative w-full">
+      <section className="w-full">
         <div className="h-32 w-full overflow-hidden border-b border-b-border bg-secondryBg md:h-50">
           {profileUser.header_img && <img src={profileUser.header_img} className="size-full min-h-32 cursor-pointer object-cover" />}
         </div>
       </section>
-      <section className="flex flex-col gap-y-3 border-b border-b-border px-2 py-3 lg:px-4">
+      <section className="relative flex flex-col gap-y-3 border-b border-b-border px-2 py-3 lg:px-4">
         <div className="flex justify-between">
-          <div className="relative z-[1] -mt-[52px] lg:-mt-[76px]">
-            <div className="size-24 overflow-hidden rounded-full border-4 border-primaryBg bg-secondryBg md:size-[140px]">
-              <img src={profileUser.profile_img} className="size-full bg-hoverBg object-cover" />
+          <div className="relative z-[1] -mt-[52px] md:-mt-[80px]">
+            <div className="size-24 xs:size-32 md:size-36 border-4 border-primaryBg bg-secondryBg overflow-hidden rounded-full">
+              <img src={profileUser.profile_img} className="size-full bg-hoverBg object-cover aspect-square" />
             </div>
           </div>
           <div className="flex h-fit items-center gap-x-3">
