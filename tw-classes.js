@@ -86,7 +86,7 @@ module.exports = plugin.withOptions(function () {
         bottom: "-18px",
         fontSize: "12px",
         position: "absolute",
-        color: theme("colors.danger"),
+        color: theme("colors.red"),
       },
       ".text-field-count": {
         top: "4px",

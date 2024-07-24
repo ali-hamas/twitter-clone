@@ -10,7 +10,7 @@ const SecureLayout = () => {
       <header className="sticky top-0 hidden h-dvh min-w-[70px] max-w-[260px] xs:block xs:min-w-[90px] xl:w-full">
         <Navbar />
       </header>
-      <main className="w-full max-w-[600px] border-x border-x-border min-h-dvh">
+      <main className="min-h-dvh w-full max-w-[600px] border-x border-x-border pb-96">
         <Outlet />
       </main>
       <Aside />
